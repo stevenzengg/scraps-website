@@ -12,4 +12,16 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Deploy on Vercel. The config defaults to Cloudflare and only runs Nitro
+  // inside a Lovable sandbox; passing an explicit `nitro` object force-enables
+  // it everywhere and emits Vercel's Build Output API v3 layout (.vercel/output)
+  // that Vercel serves natively.
+  nitro: {
+    preset: "vercel",
+    output: {
+      dir: ".vercel/output",
+      serverDir: ".vercel/output/functions/__nitro.func",
+      publicDir: ".vercel/output/static",
+    },
+  },
 });
